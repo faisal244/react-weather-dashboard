@@ -24,11 +24,14 @@ class App extends Component {
 	}
 
 	async componentDidMount() {
+		await this.getWeatherData();
+	}
+
+	async getWeatherData() {
 		const params = {
 			q: this.state.cityName,
 			units: "metric",
-			// appid: "60b4fb66103f9e3c6f93920a7d7f1377",
-			appid: "60b4fb66103f9e3c6f93920a7d7f1377",
+			appid: "5ecb90e18bea9914051a8dd07617a181",
 		};
 
 		const { data, error } = await fetchData(
@@ -39,6 +42,7 @@ class App extends Component {
 		if (data) {
 			this.setState({
 				data,
+				error: null,
 				isLoading: false,
 			});
 		}
@@ -46,13 +50,16 @@ class App extends Component {
 		if (error) {
 			this.setState({
 				error,
+				data: null,
 				isLoading: false,
 			});
 		}
 	}
 
-	onSubmit = (event) => {
+	onSubmit = async (event) => {
 		event.preventDefault();
+
+		await this.getWeatherData();
 	};
 
 	onChange = (event) => {
