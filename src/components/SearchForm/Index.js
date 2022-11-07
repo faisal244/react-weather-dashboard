@@ -1,28 +1,46 @@
-const SearchForm = (props) => {
+// const SearchForm = (props) => {
+// 	return (
+// 		<div className="search">
+// 			<form onSubmit={props.onSubmit}>
+// 				<div className="row h-100 search-form">
+// 					<div className="col-sm-12 col-md-10 p-2">
+// 						<input
+// 							type="text"
+// 							className="form-control"
+// 							id="search-city"
+// 							placeholder={props.placeholder}
+// 							onChange={props.onChange}
+// 							value={props.value}
+// 						/>
+// 					</div>
+// 					<div className="col-sm-12 col-md-2 p-2">
+// 						<button
+// 							type="submit"
+// 							className="btn btn-primary"
+// 						>
+// 							Search
+// 						</button>
+// 					</div>
+// 				</div>
+// 			</form>
+// 		</div>
+// 	);
+// };
+
+// export default SearchForm;
+
+import "../../styles.css";
+
+export const SearchForm = () => {
 	return (
-		<div className="search">
-			<form onSubmit={props.onSubmit}>
-				<div className="row h-100 search-form">
-					<div className="col-sm-12 col-md-10 p-2">
-						<input
-							type="text"
-							className="form-control"
-							id="search-city"
-							placeholder={props.placeholder}
-							onChange={props.onChange}
-							value={props.value}
-						/>
-					</div>
-					<div className="col-sm-12 col-md-2 p-2">
-						<button
-							type="submit"
-							className="btn btn-primary"
-						>
-							Search
-						</button>
-					</div>
-				</div>
-			</form>
+		<div className="aside-item">
+			<div className="ui icon input">
+				<input
+					type="text"
+					placeholder="Enter City Name"
+				/>
+				<i class="search icon"></i>
+			</div>
 		</div>
 	);
 };

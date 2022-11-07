@@ -1,109 +1,148 @@
-import { Component } from "react";
+// import { Component } from "react";
 
-import CurrentWeather from "./components/CurrentWeather";
+// import CurrentWeather from "./components/CurrentWeather";
+// import LoadingSpinner from "./components/LoadingSpinner";
+// import RecentSearches from "./components/RecentSearches";
+// import ErrorCard from "./components/ErrorCard";
+// import "./App.css";
+// import fetchData from "./utils/fetchData";
+
+import { Grid } from "semantic-ui-react";
 import Header from "./components/Header";
-import LoadingSpinner from "./components/LoadingSpinner";
-import RecentSearches from "./components/RecentSearches";
 import SearchForm from "./components/SearchForm";
-import ErrorCard from "./components/ErrorCard";
+import SearchHistory from "./components/SearchHistory";
+import WeatherInfo from "./components/WeatherInfo";
+import "./styles.css";
+import "semantic-ui-css/semantic.min.css";
 
-import fetchData from "./utils/fetchData";
+// import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
-import "./App.css";
+export const App = () => {
+	return (
+		<Grid
+			columns={2}
+			className="border"
+		>
+			{/*  row */}
+			<Grid.Row className="border">
+				{/* column */}
+				<Grid.Column
+					mobile={16}
+					tablet={8}
+					computer={4}
+					className="border"
+				>
+					<SearchForm />
+					<SearchHistory />
+				</Grid.Column>
 
-class App extends Component {
-	constructor(props) {
-		super(props);
+				<Grid.Column
+					mobile={16}
+					tablet={8}
+					computer={4}
+					className="border"
+				>
+					<Header />
+					<WeatherInfo />
+				</Grid.Column>
+			</Grid.Row>
+		</Grid>
+	);
+};
 
-		this.state = {
-			cityName: "Birmingham",
-			data: null,
-			error: null,
-			isLoading: true,
-		};
-	}
+// class App extends Component {
+// 	constructor(props) {
+// 		super(props);
 
-	async componentDidMount() {
-		await this.getWeatherData();
-	}
+// 		this.state = {
+// 			cityName: "Birmingham",
+// 			data: null,
+// 			error: null,
+// 			isLoading: true,
+// 		};
+// 	}
 
-	async getWeatherData() {
-		const params = {
-			q: this.state.cityName,
-			units: "metric",
-			appid: "5ecb90e18bea9914051a8dd07617a181",
-		};
+// 	async componentDidMount() {
+// 		await this.getWeatherData();
+// 	}
 
-		const { data, error } = await fetchData(
-			"http://api.openweathermap.org/data/2.5/weather",
-			params
-		);
+// 	async getWeatherData() {
+// 		const params = {
+// 			q: this.state.cityName,
+// 			units: "metric",
+// 			appid: "5ecb90e18bea9914051a8dd07617a181",
+// 		};
 
-		if (data) {
-			this.setState({
-				data,
-				error: null,
-				isLoading: false,
-			});
-		}
+// 		const { data, error } = await fetchData(
+// 			"http://api.openweathermap.org/data/2.5/weather",
+// 			params
+// 		);
 
-		if (error) {
-			this.setState({
-				error,
-				data: null,
-				isLoading: false,
-			});
-		}
-	}
+// 		if (data) {
+// 			this.setState({
+// 				data,
+// 				error: null,
+// 				isLoading: false,
+// 			});
+// 		}
 
-	onSubmit = async (event) => {
-		event.preventDefault();
+// 		if (error) {
+// 			this.setState({
+// 				error,
+// 				data: null,
+// 				isLoading: false,
+// 			});
+// 		}
+// 	}
 
-		await this.getWeatherData();
-	};
+// 	onSubmit = async (event) => {
+// 		event.preventDefault();
 
-	onChange = (event) => {
-		this.setState({
-			cityName: event.target.value,
-		});
-	};
+// 		await this.getWeatherData();
+// 	};
 
-	renderCurrentCard() {
-		const { data, error, isLoading } = this.state;
+// 	onChange = (event) => {
+// 		this.setState({
+// 			cityName: event.target.value,
+// 		});
+// 	};
 
-		if (data && !isLoading && !error) {
-			return <CurrentWeather data={data} />;
-		} else if (!data && !isLoading && error) {
-			return <ErrorCard message={error} />;
-		} else {
-			return <LoadingSpinner />;
-		}
-	}
+// 	renderCurrentCard() {
+// 		const { data, error, isLoading } = this.state;
 
-	render() {
-		return (
-			<div className="">
-				<Header
-					title="Weather Dashboard"
-					subtitle="Weather or not here it comes..."
-				/>
-				<div className="row main g-0">
-					<div className=" col-sm-12 col-md-3">
-						<RecentSearches />
-					</div>
-					<div className="col-sm-12 col-md-9">
-						<SearchForm
-							placeholder="Enter city name"
-							onSubmit={this.onSubmit}
-							onChange={this.onChange}
-							value={this.state.cityName}
-						/>
-						{this.renderCurrentCard()}
-					</div>
-				</div>
-			</div>
-		);
-	}
-}
+// 		if (data && !isLoading && !error) {
+// 			return <CurrentWeather data={data} />;
+// 		} else if (!data && !isLoading && error) {
+// 			return <ErrorCard message={error} />;
+// 		} else {
+// 			return <LoadingSpinner />;
+// 		}
+// 	}
+
+// 	render() {
+// 		return (
+// 			<div className="">
+// 				<Header
+// 					title="Weather Dashboard"
+// 					subtitle="Weather or not here it comes..."
+// 				/>
+// 				<div className="row main g-0">
+// 					<div className=" col-sm-12 col-md-3">
+// 						<RecentSearches />
+// 					</div>
+// 					<div className="col-sm-12 col-md-9">
+// 						<SearchForm
+// 							placeholder="Enter city name"
+// 							onSubmit={this.onSubmit}
+// 							onChange={this.onChange}
+// 							value={this.state.cityName}
+// 						/>
+// 						{this.renderCurrentCard()}
+// 					</div>
+// 				</div>
+// 			</div>
+// 		);
+// 	}
+// }
 
 export default App;
