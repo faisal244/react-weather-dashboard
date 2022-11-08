@@ -29,19 +29,41 @@
 
 // export default SearchForm;
 
+import { useState } from "react";
 import "../../styles.css";
+import classNames from "classnames";
 
 export const SearchForm = () => {
+	const [isLoading, setIsLoading] = useState(false);
+	const [searchTerm, setSearchTerm] = useState("");
+	const [inputValue, setInputValue] = useState("");
+	console.log(inputValue, searchTerm);
 	return (
-		<div className="aside-item">
-			<div className="ui icon input">
+		<form
+			className="aside-item"
+			onSubmit={(event) => {
+				event.preventDefault();
+
+				setSearchTerm(inputValue);
+			}}
+		>
+			<div
+				className={classNames("ui icon input", {
+					disabled: isLoading,
+					loading: isLoading,
+				})}
+			>
 				<input
+					value={inputValue}
+					onChange={(event) => {
+						setInputValue(event.currentTarget.value);
+					}}
 					type="text"
 					placeholder="Enter City Name"
 				/>
-				<i class="search icon"></i>
+				<i className="search icon"></i>
 			</div>
-		</div>
+		</form>
 	);
 };
 

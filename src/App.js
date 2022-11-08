@@ -7,13 +7,14 @@
 // import "./App.css";
 // import fetchData from "./utils/fetchData";
 
-import { Grid } from "semantic-ui-react";
-import Header from "./components/Header";
+import { Divider, Grid } from "semantic-ui-react";
+import Banner from "./components/Banner";
 import SearchForm from "./components/SearchForm";
 import SearchHistory from "./components/SearchHistory";
 import WeatherInfo from "./components/WeatherInfo";
 import "./styles.css";
 import "semantic-ui-css/semantic.min.css";
+// import { useState } from "react";
 
 // import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
 
@@ -42,7 +43,8 @@ export const App = () => {
 					computer={4}
 					className="border"
 				>
-					<Header />
+					<Banner />
+					<Divider />
 					<WeatherInfo />
 				</Grid.Column>
 			</Grid.Row>
