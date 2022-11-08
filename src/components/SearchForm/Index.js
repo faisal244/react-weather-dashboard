@@ -29,17 +29,18 @@
 
 // export default SearchForm;
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import classNames from "classnames";
 import axios from "axios";
-
+import { AppContext } from "../../App";
 import "../../styles.css";
 
 const API_KEY = "393609ac7b2e5f25ccdd00e626ee13dd";
 
 export const SearchForm = () => {
+	const { searchTerm, setSearchTerm } = useContext(AppContext);
 	const [isLoading, setIsLoading] = useState(false);
-	const [searchTerm, setSearchTerm] = useState("");
+	// const [searchTerm, setSearchTerm] = useState("");
 	const [inputValue, setInputValue] = useState("");
 
 	useEffect(() => {
@@ -47,7 +48,7 @@ export const SearchForm = () => {
 			setIsLoading(true);
 			(async () => {
 				const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${API_KEY}`;
-				console.log("make API request for ", url);
+				// console.log("make API request for ", url);
 
 				const { data } = await axios.get(url);
 				console.log(data);

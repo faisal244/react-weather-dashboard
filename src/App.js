@@ -1,54 +1,57 @@
-// import { Component } from "react";
-
-// import CurrentWeather from "./components/CurrentWeather";
-// import LoadingSpinner from "./components/LoadingSpinner";
-// import RecentSearches from "./components/RecentSearches";
-// import ErrorCard from "./components/ErrorCard";
-// import "./App.css";
-// import fetchData from "./utils/fetchData";
-
+import React, { useState } from "react";
 import { Divider, Grid } from "semantic-ui-react";
-import Banner from "./components/Banner";
-import SearchForm from "./components/SearchForm";
-import SearchHistory from "./components/SearchHistory";
-import WeatherInfo from "./components/WeatherInfo";
+import { Banner } from "./components/Banner";
+import { SearchForm } from "./components/SearchForm";
+import { SearchHistory } from "./components/SearchHistory";
+import { WeatherInfo } from "./components/WeatherInfo";
+
 import "./styles.css";
 import "semantic-ui-css/semantic.min.css";
-// import { useState } from "react";
 
-// import Grid2 from "@mui/material/Unstable_Grid2"; // Grid version 2
+export const AppContext = React.createContext();
 
 export const App = () => {
+	const [searchTerm, setSearchTerm] = useState("");
+	const [cities, setCities] = useState("");
 	return (
-		<Grid
-		// columns={2}
-		// className="border"
+		<AppContext.Provider
+			value={{
+				cities,
+				setCities,
+				searchTerm,
+				setSearchTerm,
+			}}
 		>
-			{/*  row */}
-			<Grid.Row className="border">
-				{/* column */}
-				<Grid.Column
-					mobile={16}
-					tablet={4}
-					computer={4}
-					className="border"
-				>
-					<SearchForm />
-					<SearchHistory />
-				</Grid.Column>
+			<Grid
+			// columns={2}
+			// className="border"
+			>
+				{/*  row */}
+				<Grid.Row className="border">
+					{/* column */}
+					<Grid.Column
+						mobile={16}
+						tablet={4}
+						computer={4}
+						className="border"
+					>
+						<SearchForm />
+						<SearchHistory />
+					</Grid.Column>
 
-				<Grid.Column
-					mobile={16}
-					tablet={12}
-					computer={12}
-					// className="border"
-				>
-					<Banner />
-					<Divider />
-					<WeatherInfo />
-				</Grid.Column>
-			</Grid.Row>
-		</Grid>
+					<Grid.Column
+						mobile={16}
+						tablet={12}
+						computer={12}
+						// className="border"
+					>
+						<Banner />
+						<Divider />
+						<WeatherInfo />
+					</Grid.Column>
+				</Grid.Row>
+			</Grid>
+		</AppContext.Provider>
 	);
 };
 
