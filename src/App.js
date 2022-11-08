@@ -21,15 +21,15 @@ import "semantic-ui-css/semantic.min.css";
 export const App = () => {
 	return (
 		<Grid
-			columns={2}
-			className="border"
+		// columns={2}
+		// className="border"
 		>
 			{/*  row */}
 			<Grid.Row className="border">
 				{/* column */}
 				<Grid.Column
 					mobile={16}
-					tablet={8}
+					tablet={4}
 					computer={4}
 					className="border"
 				>
@@ -39,9 +39,9 @@ export const App = () => {
 
 				<Grid.Column
 					mobile={16}
-					tablet={8}
-					computer={4}
-					className="border"
+					tablet={12}
+					computer={12}
+					// className="border"
 				>
 					<Banner />
 					<Divider />
