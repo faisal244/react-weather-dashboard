@@ -12,7 +12,10 @@ export const AppContext = React.createContext();
 
 export const App = () => {
 	const [searchTerm, setSearchTerm] = useState("");
-	const [cities, setCities] = useState("");
+	const [cities, setCities] = useState(
+		JSON.parse(localStorage.getItem("cities")) || []
+	);
+	const [weatherData, setWeatherData] = useState();
 	return (
 		<AppContext.Provider
 			value={{

@@ -38,7 +38,8 @@ import "../../styles.css";
 const API_KEY = "393609ac7b2e5f25ccdd00e626ee13dd";
 
 export const SearchForm = () => {
-	const { searchTerm, setSearchTerm } = useContext(AppContext);
+	const { searchTerm, setSearchTerm, cities, setCities } =
+		useContext(AppContext);
 	const [isLoading, setIsLoading] = useState(false);
 	// const [searchTerm, setSearchTerm] = useState("");
 	const [inputValue, setInputValue] = useState("");
@@ -52,6 +53,7 @@ export const SearchForm = () => {
 
 				const { data } = await axios.get(url);
 				console.log(data);
+				setCities([...cities, searchTerm]);
 				setIsLoading(false);
 			})();
 		}

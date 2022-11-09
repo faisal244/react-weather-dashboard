@@ -1,13 +1,34 @@
-// const SearchHistory = (props) => {
-// 	return <div>Recent Cities</div>;
-// };
+import { useContext, useState } from "react";
+import { List } from "semantic-ui-react";
+import { AppContext } from "../../App";
 
-// export default SearchHistory;
+import "../../styles.css";
 
-import React from "react";
+export const SearchHistory = () => {
+	const { cities, setSearchTerm } = useContext(AppContext);
 
-const SearchHistory = () => {
-	return <div className="aside-item">Recent Cities</div>;
+	return (
+		<div className="aside-item">
+			<h2>Recent Searches</h2>
+
+			<List divided>
+				{/* {cities.map((city) => { */}
+				return (
+				<List.Item
+					// key={city}
+					as="a"
+					onClick={() => {
+						console.log("make API request for city clicked");
+						// setSearchTerm(city);
+					}}
+					className="recent-search-item"
+				>
+					{/* {city} */}
+				</List.Item>
+				); })}
+			</List>
+		</div>
+	);
 };
 
 export default SearchHistory;
