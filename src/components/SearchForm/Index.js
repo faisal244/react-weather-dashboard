@@ -1,30 +1,70 @@
-const SearchForm = (props) => {
+import { useContext, useEffect, useState } from "react";
+import classNames from "classnames";
+import axios from "axios";
+
+import "semantic-ui-css/semantic.min.css";
+import "../../styles.css";
+import { AppContext } from "../../App";
+
+const API_KEY = "393609ac7b2e5f25ccdd00e626ee13dd";
+
+export const SearchForm = () => {
+	const { searchTerm, setSearchTerm, setCities, cities, setWeatherData } =
+		useContext(AppContext);
+	const [isLoading, setIsLoading] = useState(false);
+	const [inputValue, setInputValue] = useState("");
+
+	useEffect(() => {
+		if (searchTerm) {
+			(async () => {
+				setIsLoading(true);
+
+				const url = `https://api.openweathermap.org/data/2.5/weather?q=${searchTerm}&appid=${API_KEY}`;
+
+				const { data } = await axios.get(url);
+				console.log(data);
+				setWeatherData(data);
+
+				const citiesFromLS = JSON.parse(localStorage.getItem("cities")) || [];
+
+				if (!citiesFromLS.includes(searchTerm)) {
+					citiesFromLS.push(searchTerm);
+					localStorage.setItem("cities", JSON.stringify(citiesFromLS));
+					setCities([...cities, searchTerm]);
+				}
+
+				setSearchTerm("");
+				setInputValue("");
+				setIsLoading(false);
+			})();
+		}
+	}, [searchTerm]);
+
 	return (
-		<div className="search">
-			<form onSubmit={props.onSubmit}>
-				<div className="row h-100 search-form">
-					<div className="col-sm-12 col-md-10 p-2">
-						<input
-							type="text"
-							className="form-control"
-							id="search-city"
-							placeholder={props.placeholder}
-							onChange={props.onChange}
-							value={props.value}
-						/>
-					</div>
-					<div className="col-sm-12 col-md-2 p-2">
-						<button
-							type="submit"
-							className="btn btn-primary"
-						>
-							Search
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
+		<form
+			className="aside-item"
+			onSubmit={(event) => {
+				event.preventDefault();
+
+				setSearchTerm(inputValue);
+			}}
+		>
+			<div
+				className={classNames("ui icon input", {
+					disabled: isLoading,
+					loading: isLoading,
+				})}
+			>
+				<input
+					value={inputValue}
+					onChange={(event) => {
+						setInputValue(event.currentTarget.value);
+					}}
+					type="text"
+					placeholder="Enter city name"
+				/>
+				<i className="search icon"></i>
+			</div>
+		</form>
 	);
 };
-
-export default SearchForm;
