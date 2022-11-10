@@ -23,7 +23,7 @@ export const SearchForm = () => {
 
 				const { data } = await axios.get(url);
 				console.log(data);
-				// setWeatherData(data);
+				setWeatherData(data);
 
 				const citiesFromLS = JSON.parse(localStorage.getItem("cities")) || [];
 

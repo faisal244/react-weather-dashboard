@@ -23,6 +23,8 @@ export const App = () => {
 				setCities,
 				searchTerm,
 				setSearchTerm,
+				weatherData,
+				setWeatherData,
 			}}
 		>
 			<Grid
